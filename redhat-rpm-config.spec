@@ -4,7 +4,7 @@
 # 2) When making changes, increment the version (in baserelease) by 1.
 #    rpmdev-bumpspec and other tools update the macro below, which is used
 #    in Version: to get the desired effect.
-%global baserelease 228
+%global baserelease 229
 
 Summary: Red Hat specific rpm configuration files
 Name: redhat-rpm-config
@@ -105,6 +105,7 @@ Requires: qt5-srpm-macros
 Requires: rust-srpm-macros
 Requires: rpmautospec-rpm-macros
 Requires: package-notes-srpm-macros
+Requires: pyproject-srpm-macros
 
 %if ! 0%{?rhel}
 Requires: fpc-srpm-macros
@@ -221,6 +222,9 @@ install -p -m 644 -t %{buildroot}%{_rpmluadir}/fedora/srpm forge.lua
 %doc buildflags.md
 
 %changelog
+* Tue Jan 17 2023 Miro Hrončok <mhroncok@redhat.com> - 229-1
+- Add pyproject-srpm-macros to the default buildroot
+
 * Mon Aug 8 2022 Maxwell G <gotmax@e.email> - 228-1
 - Add macros.shell-completions
 
