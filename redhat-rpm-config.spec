@@ -4,7 +4,7 @@
 # 2) When making changes, increment the version (in baserelease) by 1.
 #    rpmdev-bumpspec and other tools update the macro below, which is used
 #    in Version: to get the desired effect.
-%global baserelease 229
+%global baserelease 230
 
 Summary: Red Hat specific rpm configuration files
 Name: redhat-rpm-config
@@ -58,6 +58,8 @@ Source201: brp-mangle-shebangs
 
 # for converting llvm LTO bitcode objects into ELF
 Source204: brp-llvm-compile-lto-elf
+
+# Source205: clang-merge-prof-data
 
 # Dependency generator scripts (deprecated)
 Source300: find-provides
@@ -155,6 +157,7 @@ install -p -m 755 -t %{buildroot}%{rrcdir} config.*
 install -p -m 755 -t %{buildroot}%{rrcdir} dist.sh
 install -p -m 755 -t %{buildroot}%{rrcdir} gpgverify
 install -p -m 755 -t %{buildroot}%{rrcdir} brp-*
+# install -p -m 755 -t %{buildroot}%{rrcdir} clang-merge-prof-data
 
 install -p -m 755 -t %{buildroot}%{rrcdir} find-*
 mkdir -p %{buildroot}%{rrcdir}/find-provides.d
@@ -191,6 +194,7 @@ install -p -m 644 -t %{buildroot}%{_rpmluadir}/fedora/srpm forge.lua
 %{rrcdir}/macros
 %{rrcdir}/rpmrc
 %{rrcdir}/brp-*
+# % {rrcdir}/clang-merge-prof-data
 %{rrcdir}/dist.sh
 %{rrcdir}/gpgverify
 %{rrcdir}/redhat-hardened-*
@@ -222,6 +226,9 @@ install -p -m 644 -t %{buildroot}%{_rpmluadir}/fedora/srpm forge.lua
 %doc buildflags.md
 
 %changelog
+* Wed Mar 01 2023 Konrad Kleine <kkleine@redhat.com> - 230-1
+- Profile data support
+
 * Tue Jan 17 2023 Miro Hrončok <mhroncok@redhat.com> - 229-1
 - Add pyproject-srpm-macros to the default buildroot
 
